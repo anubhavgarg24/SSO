@@ -1,5 +1,6 @@
 package com.example.ssoDemo.sso.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
@@ -7,8 +8,11 @@ public class Cat {
     Status status;
     String _id;
     String user;
-    String text;
-    int __v;
+    @JsonProperty("text")
+    String fact;
+
+    @JsonProperty("__v")
+    int version;
     String source;
     String updatedAt;
     String type;

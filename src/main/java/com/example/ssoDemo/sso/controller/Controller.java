@@ -3,9 +3,8 @@ package com.example.ssoDemo.sso.controller;
 import com.example.ssoDemo.sso.model.Cat;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,9 +29,14 @@ public class Controller {
         try{
             List<Cat> resp = objectMapper.readValue(jsonResponse, new TypeReference<>() {
             });
-            return resp.get(0).getText();
+            return resp.get(0).getFact();
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    @GetMapping("/ip")
+    public String getIp(HttpServletRequest request) {
+        return request.getLocalAddr();
     }
 }
